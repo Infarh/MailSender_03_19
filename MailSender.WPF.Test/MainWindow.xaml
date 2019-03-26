@@ -5,14 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MailSender.WPF.Test"
         Title="MainWindow" 
-        Height="450" 
+        Height="450"
         Width="800">
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="Foreground">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="{StaticResource NormalBrushGradient1}"
+                                      Offset="0" />
+                        <GradientStop Color="{StaticResource NormalBrushGradient2}"
+                                      Offset="0.41800001263618469" />
+                        <GradientStop Color="{StaticResource NormalBrushGradient3}"
+                                      Offset="0.418" />
+                        <GradientStop Color="{StaticResource NormalBrushGradient4}"
+                                      Offset="1" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="Black" Offset="1"/>
+            <GradientStop Color="#FF03137E"/>
+        </LinearGradientBrush>
+    </Window.Background>
     <Grid>
         <Button Content="Отправить" Margin="275,0,342,159" VerticalAlignment="Bottom" Height="40" Click="OnSendButtonClick"/>
         <TextBox Name="UserNameTextBox" HorizontalAlignment="Left" Height="23" Margin="95,168,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="170"/>
         <PasswordBox x:Name="PasswordBoxEditor" HorizontalAlignment="Right" Margin="0,168,162,0" VerticalAlignment="Top" Width="165"/>
         <Label Content="Имя пользвоателя" HorizontalAlignment="Left" Margin="95,142,0,0" VerticalAlignment="Top" Width="130"/>
         <Label Content="Пароль" HorizontalAlignment="Right" Margin="0,142,197,0" VerticalAlignment="Top" Width="130"/>
-
+        <RadioButton Content="RadioButton" Margin="345,105,361,0" VerticalAlignment="Top" d:LayoutOverrides="Width"/>
     </Grid>
 </Window>
