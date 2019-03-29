@@ -4,9 +4,158 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MailSender.WPF"
+        xmlns:data="clr-namespace:MailSender.WPF.Data"
+        xmlns:entityes="clr-namespace:MailSender.lib.Entityes;assembly=MailSender.lib"
         mc:Ignorable="d"
         Title="MainWindow" 
-        Height="352" Width="944">
-    <DockPanel>
-    </DockPanel>
+        Height="372" Width="814">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0">
+            <MenuItem Header="Файл"></MenuItem>
+        </Menu>
+        <StatusBar Grid.Row="2">
+            <TextBlock>Готов</TextBlock>
+        </StatusBar>
+        <ResizeGrip Grid.Row="2" HorizontalAlignment="Right"/>
+        <TabControl Grid.Row="1">
+            <TabItem Header="Формирование групп рассылки">
+                <DockPanel>
+                    <ToolBarTray DockPanel.Dock="Top">
+                        <ToolBarTray.Resources>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Height" Value="15"/>
+                            </Style>
+                        </ToolBarTray.Resources>
+                        <ToolBar>
+                            <TextBlock Text="Отправители"
+                                       Margin="0,0,10,0"
+                                       VerticalAlignment="Center"/>
+                            <ComboBox Width="150" SelectedIndex="1"
+                                      DisplayMemberPath="Name"
+                                      ItemsSource="{x:Static data:TestData.Senders}"/>
+                            <Button ToolTip="Добавить">
+                                <Image Source="Media/add.png"/>
+                            </Button>
+                            <Button ToolTip="Редактировать">
+                                <Image Source="Media/Edit.png"/>
+                            </Button>
+                            <Button ToolTip="Удалить">
+                                <Image Source="Media/remove.png"/>
+                            </Button>
+                        </ToolBar>
+                        <ToolBar Band="1">
+                            <TextBlock Text="Сервера"
+                                       Margin="0,0,10,0"
+                                       VerticalAlignment="Center"/>
+                            <ComboBox Width="150" SelectedIndex="1"
+                                      ItemsSource="{x:Static data:TestData.Servers}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type entityes:Server}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Name}"/>
+                                            <TextBlock Text="{Binding Address}" Margin="4,0,0,0" Opacity="0.6"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <Button ToolTip="Добавить">
+                                <Image Source="Media/add.png"/>
+                            </Button>
+                            <Button ToolTip="Редактировать">
+                                <Image Source="Media/Edit.png"/>
+                            </Button>
+                            <Button ToolTip="Удалить">
+                                <Image Source="Media/remove.png"/>
+                            </Button>
+                        </ToolBar>
+                        <ToolBar>
+                            <TextBlock Text="Перейти в планировщик"
+                                       Margin="0,0,10,0"
+                                       VerticalAlignment="Center"/>
+                            <Button>
+                                <Image Source="Media/scheduler.png"></Image>
+                            </Button>
+                        </ToolBar>
+                        <ToolBar Band="1">
+                            <TextBlock Text="Список адресатов"
+                                       Margin="0,0,10,0"
+                                       VerticalAlignment="Center"/>
+                            <Button ToolTip="Добавить">
+                                <Image Source="Media/add.png"/>
+                            </Button>
+                            <Button ToolTip="Редактировать">
+                                <Image Source="Media/Edit.png"/>
+                            </Button>
+                            <Button ToolTip="Удалить">
+                                <Image Source="Media/remove.png"/>
+                            </Button>
+                        </ToolBar>
+                    </ToolBarTray>
+                    <Grid>
+                        <!--<Image Source="https://avatars.mds.yandex.net/get-pdb/986482/93793f85-dddb-4e76-8c79-10bb17d0bf01/s1200"></Image>-->               
+                    </Grid>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Планировщик">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock>Дата:</TextBlock>
+                        <Calendar/>
+                        <TextBlock>Время:</TextBlock>
+                        <TextBox></TextBox>
+                        <Button>Запланировать</Button>
+                        <Button>Отправить сразу</Button>
+                    </StackPanel>
+                    <GroupBox Header="Задания планировщика" Grid.Column="1">
+                        <ListBox>
+                            <ListBoxItem>Задание 1</ListBoxItem>
+                            <ListBoxItem>Задание 2</ListBoxItem>
+                            <ListBoxItem>Задание 3</ListBoxItem>
+                            <ListBoxItem>Задание 4</ListBoxItem>
+                        </ListBox>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Редактор писем">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" MinWidth="200"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Header="Список писем" Grid.Column="0">
+                        <DockPanel>
+                            <Button DockPanel.Dock="Bottom">Удалить письмо</Button>
+                            <Button DockPanel.Dock="Bottom">Добавить письмо</Button>
+                            <ListBox>
+                                <ListBoxItem>Письмо 1</ListBoxItem>
+                                <ListBoxItem>Письмо 2</ListBoxItem>
+                                <ListBoxItem>Письмо 3</ListBoxItem>
+                            </ListBox>
+                        </DockPanel>
+                    </GroupBox>
+                    <GroupBox Header="Редактор" Grid.Column="1">
+                        <DockPanel>
+                            <GroupBox Header="Заголовок" DockPanel.Dock="Top"
+                                      BorderBrush="{x:Null}">
+                                <TextBox/>
+                            </GroupBox>
+                            <GroupBox Header="Текст" BorderBrush="{x:Null}">
+                                <TextBox/>
+                            </GroupBox>
+                        </DockPanel>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Статистика" IsEnabled="False"></TabItem>
+        </TabControl>
+    </Grid>
 </Window>
