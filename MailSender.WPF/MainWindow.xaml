@@ -3,9 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:MailSender.WPF"
         xmlns:data="clr-namespace:MailSender.WPF.Data"
         xmlns:entityes="clr-namespace:MailSender.lib.Entityes;assembly=MailSender.lib"
+        xmlns:linq2sql="clr-namespace:MailSender.lib.Data.linq2sql;assembly=MailSender.lib"
         mc:Ignorable="d"
         Title="MainWindow" 
         Height="372" Width="814">
@@ -39,13 +41,17 @@
                                       DisplayMemberPath="Name"
                                       ItemsSource="{x:Static data:TestData.Senders}"/>
                             <Button ToolTip="Добавить">
-                                <Image Source="Media/add.png"/>
+                                <fa:ImageAwesome Icon="Plus" Height="15" Foreground="Green"/>
                             </Button>
                             <Button ToolTip="Редактировать">
-                                <Image Source="Media/Edit.png"/>
+                                <fa:ImageAwesome Icon="Edit" Height="15" Foreground="DarkBlue"/>
                             </Button>
                             <Button ToolTip="Удалить">
-                                <Image Source="Media/remove.png"/>
+                                <fa:ImageAwesome Icon="Remove" Height="15" Foreground="Red">
+                                    <fa:ImageAwesome.Effect>
+                                        <DropShadowEffect ShadowDepth="1"/>
+                                    </fa:ImageAwesome.Effect>
+                                </fa:ImageAwesome>
                             </Button>
                         </ToolBar>
                         <ToolBar Band="1">
@@ -97,7 +103,19 @@
                         </ToolBar>
                     </ToolBarTray>
                     <Grid>
-                        <!--<Image Source="https://avatars.mds.yandex.net/get-pdb/986482/93793f85-dddb-4e76-8c79-10bb17d0bf01/s1200"></Image>-->               
+                        <Grid.Resources>
+                            <linq2sql:MailSenderDBDataContext x:Key="DataContext"/>
+                        </Grid.Resources>
+                        <DataGrid ItemsSource="{Binding Recipients, Source={StaticResource DataContext}}"
+                                  AutoGenerateColumns="False" IsReadOnly="True"
+                                  HorizontalGridLinesBrush="{x:Null}"
+                                  AlternatingRowBackground="#7F87CEFA">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="#" Binding="{Binding Id}"/>
+                                <DataGridTextColumn Header="Имя" Binding="{Binding Name}" Width="*"/>
+                                <DataGridTextColumn Header="Адрес" Binding="{Binding Email}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
                     </Grid>
                 </DockPanel>
             </TabItem>
