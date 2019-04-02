@@ -1,14 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
+using MailSender.lib.Entityes;
+using MailSender.lib.Services.Interfaces;
 
 namespace MailSender.WPF.ViewModel
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        private readonly IRecipientsData _RecipientsData;
+
+
         private string _Title = "Рассыльщик почты";
 
         public string Title
@@ -33,5 +36,41 @@ namespace MailSender.WPF.ViewModel
             set => Set(ref _Progress, value);
         }
 
+        public ObservableCollection<Recipient> Recipients { get; } = new ObservableCollection<Recipient>();
+
+        private Recipient _SelectedRecipient;
+
+        public Recipient SelectedRecipient
+        {
+            get => _SelectedRecipient;
+            set => Set(ref _SelectedRecipient, value);
+        }
+
+        public ICommand LoadDataCommand { get; }
+
+        public ICommand SaveRecipientCommand { get; }
+
+        public MainWindowViewModel(IRecipientsData RecipientsData)
+        {
+            _RecipientsData = RecipientsData;
+
+
+            LoadDataCommand = new RelayCommand(OnLoadDataCommandExecuted);
+            SaveRecipientCommand = new RelayCommand<Recipient>(OnSaveRecipientCommandExecuted, CanSaveRecipientCommandExecute);
+        }
+
+        private void OnLoadDataCommandExecuted()
+        {
+            Recipients.Clear();
+            foreach (var recipient in _RecipientsData.GetItems())
+                Recipients.Add(recipient);
+        }
+
+        private void OnSaveRecipientCommandExecuted(Recipient recipient)
+        {
+            _RecipientsData.Edit(recipient);
+        }
+
+        private bool CanSaveRecipientCommandExecute(Recipient recipient) => recipient != null;
     }
 }

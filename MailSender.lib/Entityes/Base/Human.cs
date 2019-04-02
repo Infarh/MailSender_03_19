@@ -8,6 +8,8 @@ namespace MailSender.lib.Entityes.Base
 {
     public class Human
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
         public string EmailAddress { get; set; }

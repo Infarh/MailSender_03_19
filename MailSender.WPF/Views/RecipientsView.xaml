@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="MailSender.WPF.Views.RecipientsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:local="clr-namespace:MailSender.WPF.Views"
+             DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadDataCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <DockPanel>
+        <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="18" Margin="5">Получатели сообщений</TextBlock>
+        <DockPanel DockPanel.Dock="Top" Margin="10,5">
+            <TextBlock>Поиск по имени:</TextBlock>
+            <TextBox></TextBox>
+        </DockPanel>
+        <Button DockPanel.Dock="Bottom" HorizontalAlignment="Center" Padding="30,5" Margin="0,10"
+                Command="{Binding LoadDataCommand}">
+            Обновить
+        </Button>
+        <DataGrid ItemsSource="{Binding Recipients}" AutoGenerateColumns="False"
+                  HorizontalGridLinesBrush="{x:Null}" IsReadOnly="True"
+                  SelectedItem="{Binding SelectedRecipient}"
+                  AlternatingRowBackground="AliceBlue">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="#" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Имя" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Адрес" Binding="{Binding EmailAddress}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</UserControl>

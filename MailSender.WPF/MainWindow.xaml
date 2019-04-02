@@ -102,20 +102,17 @@
                             </Button>
                         </ToolBar>
                     </ToolBarTray>
-                    <Grid>
-                        <Grid.Resources>
-                            <linq2sql:MailSenderDBDataContext x:Key="DataContext"/>
-                        </Grid.Resources>
-                        <DataGrid ItemsSource="{Binding Recipients, Source={StaticResource DataContext}}"
-                                  AutoGenerateColumns="False" IsReadOnly="True"
-                                  HorizontalGridLinesBrush="{x:Null}"
-                                  AlternatingRowBackground="#7F87CEFA">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="#" Binding="{Binding Id}"/>
-                                <DataGridTextColumn Header="Имя" Binding="{Binding Name}" Width="*"/>
-                                <DataGridTextColumn Header="Адрес" Binding="{Binding Email}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
+                    <Grid xmlns:view="clr-namespace:MailSender.WPF.Views">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <view:RecipientsView Grid.Column="0"/> 
+                        <view:RecipientEditor Grid.Column="1" Margin="10"/>
+                        <GridSplitter Grid.Column="1" 
+                                      VerticalAlignment="Stretch" 
+                                      HorizontalAlignment="Left"
+                                      Width="3" Foreground="Transparent"/>
                     </Grid>
                 </DockPanel>
             </TabItem>
