@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MailSender.lib.Entityes;
 
 namespace MailSender.WPF.Views
 {
@@ -20,9 +22,20 @@ namespace MailSender.WPF.Views
     /// </summary>
     public partial class RecipientEditor : UserControl
     {
-        public RecipientEditor()
+        public RecipientEditor() => InitializeComponent();
+
+        private void OnValidationError(object Sender, ValidationErrorEventArgs E)
         {
-            InitializeComponent();
+            if(!(E.Source is Control control)) return;
+
+            if (E.Action == ValidationErrorEventAction.Added)
+            {
+                control.ToolTip = E.Error.ErrorContent.ToString();
+            }
+            else
+            {
+                control.ToolTip = "";
+            }
         }
     }
 }
