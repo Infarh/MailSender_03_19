@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28729.10
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailSender.Console", "MailSender.Console\MailSender.Console.csproj", "{8B7DB8F7-20D4-4FF2-89A1-3B80B347E9CE}"
 EndProject
@@ -14,6 +14,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailSender.lib", "MailSender.lib\MailSender.lib.csproj", "{CEB03BD9-702B-4056-8EDB-52657CA53BB8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E0FE32F3-4108-4C80-BF28-162FF01A5349}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailSender.WPF.Tests", "Tests\MailSender.WPF.Tests\MailSender.WPF.Tests.csproj", "{C890CD00-64AF-4F58-9BB8-178A34198E95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailSender.lib.Tests", "Tests\MailSender.lib.Tests\MailSender.lib.Tests.csproj", "{9265B11E-A846-47A5-A41D-DD12844E5418}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +41,14 @@ Global
 		{CEB03BD9-702B-4056-8EDB-52657CA53BB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEB03BD9-702B-4056-8EDB-52657CA53BB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEB03BD9-702B-4056-8EDB-52657CA53BB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C890CD00-64AF-4F58-9BB8-178A34198E95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C890CD00-64AF-4F58-9BB8-178A34198E95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C890CD00-64AF-4F58-9BB8-178A34198E95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C890CD00-64AF-4F58-9BB8-178A34198E95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9265B11E-A846-47A5-A41D-DD12844E5418}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9265B11E-A846-47A5-A41D-DD12844E5418}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9265B11E-A846-47A5-A41D-DD12844E5418}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9265B11E-A846-47A5-A41D-DD12844E5418}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +56,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{8B7DB8F7-20D4-4FF2-89A1-3B80B347E9CE} = {5E026847-9A83-4BC4-ACB0-32BF80EF2209}
 		{1B52B045-5D39-4BFE-886A-21144B8C1740} = {5E026847-9A83-4BC4-ACB0-32BF80EF2209}
+		{C890CD00-64AF-4F58-9BB8-178A34198E95} = {E0FE32F3-4108-4C80-BF28-162FF01A5349}
+		{9265B11E-A846-47A5-A41D-DD12844E5418} = {E0FE32F3-4108-4C80-BF28-162FF01A5349}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {659E25F3-BBAA-4EE4-B40A-279C20E82D49}

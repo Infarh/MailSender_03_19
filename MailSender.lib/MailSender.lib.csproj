@@ -65,6 +65,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Scheduler.cs" />
+    <Compile Include="Services\EmailsDataInMemory.cs" />
+    <Compile Include="Services\Interfaces\IEmailsData.cs" />
     <Compile Include="Services\Interfaces\IRecipientsData.cs" />
     <Compile Include="Services\RecipientsDataLinq2Sql.cs" />
     <Compile Include="Service\Encryptor.cs" />
