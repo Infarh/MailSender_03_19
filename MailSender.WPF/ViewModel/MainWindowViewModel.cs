@@ -62,7 +62,7 @@ namespace MailSender.WPF.ViewModel
         private void OnLoadDataCommandExecuted()
         {
             Recipients.Clear();
-            foreach (var recipient in _RecipientsData.GetItems())
+            foreach (var recipient in _RecipientsData.GetAll())
                 Recipients.Add(recipient);
         }
 

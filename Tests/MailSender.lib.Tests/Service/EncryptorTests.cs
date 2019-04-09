@@ -2,15 +2,15 @@
 
 namespace MailSender.lib.Service.Tests
 {
-    [TestClass()]
+    [TestClass]
     public class EncryptorTests
     {
-        [TestMethod()]
+        [TestMethod]
         public void EncryptTest()
         {
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void DecryptTest()
         {
         }

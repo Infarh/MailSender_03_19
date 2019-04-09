@@ -16,7 +16,7 @@ namespace MailSender.lib.Services
             _Context = Context;
         }
 
-        public IEnumerable<Recipient> GetItems()
+        public IEnumerable<Recipient> GetAll()
         {
             var db_recipients = _Context.Recipients;
             return db_recipients.Select(r => new Recipient
@@ -27,7 +27,7 @@ namespace MailSender.lib.Services
             });
         }
 
-        public Recipient GetItemById(int id)
+        public Recipient GetById(int id)
         {
             var db_recipient = _Context.Recipients.FirstOrDefault(r => r.Id == id);
             if (db_recipient is null)
@@ -40,6 +40,11 @@ namespace MailSender.lib.Services
             };
         }
 
+        public void Add(Recipient email)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Edit(Recipient recipient)
         {
             var db_recipient = _Context.Recipients.FirstOrDefault(r => r.Id == recipient.Id);
@@ -49,6 +54,16 @@ namespace MailSender.lib.Services
             db_recipient.Email = recipient.EmailAddress;
 
             _Context.SubmitChanges();
+        }
+
+        public void Remove(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SaveChanges()
+        {
+            throw new NotImplementedException();
         }
     }
 }

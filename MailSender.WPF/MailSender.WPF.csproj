@@ -91,6 +91,7 @@
     <Compile Include="Components\ListControl.xaml.cs">
       <DependentUpon>ListControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\DebugBindingConverter.cs" />
     <Compile Include="ValidationRules\Class1.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
