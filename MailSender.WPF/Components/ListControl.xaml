@@ -6,6 +6,9 @@
              xmlns:l="clr-namespace:MailSender.WPF.Components"
              xmlns:data="clr-namespace:MailSender.WPF.Data"
              xmlns:fa="http://schemas.fontawesome.io/icons/">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}"></Style>
+    </UserControl.Resources>
     <DockPanel DataContext="{Binding RelativeSource={RelativeSource AncestorType=l:ListControl}}">
         <TextBlock Text="{Binding PanelName, TargetNullValue=[panel], FallbackValue=(panel)}"
                    Margin="0,0,10,0"

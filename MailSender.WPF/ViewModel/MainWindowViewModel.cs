@@ -10,6 +10,7 @@ namespace MailSender.WPF.ViewModel
     public class MainWindowViewModel : ViewModelBase
     {
         private readonly IRecipientsData _RecipientsData;
+        private readonly IEntityEditor _EntityEditor;
 
 
         private string _Title = "Рассыльщик почты";
@@ -50,13 +51,25 @@ namespace MailSender.WPF.ViewModel
 
         public ICommand SaveRecipientCommand { get; }
 
-        public MainWindowViewModel(IRecipientsData RecipientsData)
+        public ICommand EditSenderCommand { get; }
+
+        public MainWindowViewModel(IRecipientsData RecipientsData, IEntityEditor EntityEditor)
         {
             _RecipientsData = RecipientsData;
+            _EntityEditor = EntityEditor;
 
 
             LoadDataCommand = new RelayCommand(OnLoadDataCommandExecuted);
             SaveRecipientCommand = new RelayCommand<Recipient>(OnSaveRecipientCommandExecuted, CanSaveRecipientCommandExecute);
+            EditSenderCommand = new RelayCommand<Sender>(OnEditSenderCommandExecuted, s => s != null);
+        }
+
+        private void OnEditSenderCommandExecuted(Sender sender)
+        {
+            if (_EntityEditor.Edit(sender))
+            {
+                //_SendersData.SaveChanges();
+            }   
         }
 
         private void OnLoadDataCommandExecuted()

@@ -92,14 +92,21 @@
       <DependentUpon>ListControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\DebugBindingConverter.cs" />
+    <Compile Include="Infrastructure\EventArgs.cs" />
+    <Compile Include="Infrastructure\ICloseNotification.cs" />
+    <Compile Include="Services\SendersEditor.cs" />
     <Compile Include="ValidationRules\Class1.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\SenderEditorViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Views\RecipientEditor.xaml.cs">
       <DependentUpon>RecipientEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RecipientsView.xaml.cs">
       <DependentUpon>RecipientsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SenderEditorView.xaml.cs">
+      <DependentUpon>SenderEditorView.xaml</DependentUpon>
     </Compile>
     <Page Include="Components\ListControl.xaml">
       <SubType>Designer</SubType>
@@ -123,6 +130,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RecipientsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SenderEditorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

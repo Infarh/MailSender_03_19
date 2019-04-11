@@ -56,7 +56,16 @@
                             </Button>-->
                             <c:ListControl PanelName="Отправители" 
                                            Items="{x:Static data:TestData.Senders}"
-                                           DisplayMemberPath="Name"/>
+                                           EditCommand="{Binding EditSenderCommand}">
+                                <c:ListControl.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type entityes:Sender}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Name}" Margin="0,0,3,0"/>
+                                            <TextBlock Text="{Binding EmailAddress}" Opacity="0.5"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </c:ListControl.ItemTemplate>
+                            </c:ListControl>
                         </ToolBar>
                         <ToolBar Band="1">
                             <!--<TextBlock Text="Сервера"
