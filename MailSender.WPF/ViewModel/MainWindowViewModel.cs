@@ -15,6 +15,7 @@ namespace MailSender.WPF.ViewModel
         private readonly IRecipientsData _RecipientsData;
         private readonly IServersData _ServersData;
         private readonly IEmailsData _EmailsData;
+        private readonly IEmailListsData _EmailListsData;
         private readonly ISchedulerTasksData _TasksData;
         private readonly ISendersData _SendersData;
 
@@ -66,12 +67,14 @@ namespace MailSender.WPF.ViewModel
             IRecipientsData RecipientsData,
             IServersData ServersData,
             IEmailsData MailsData,
+            IEmailListsData EmailListsData,
             ISchedulerTasksData TasksData,
             ISendersData SendersData)
         {
             _RecipientsData = RecipientsData ?? throw new ArgumentNullException(nameof(RecipientsData));
             _ServersData = ServersData ?? throw new ArgumentNullException(nameof(ServersData));
             _EmailsData = MailsData ?? throw new ArgumentNullException(nameof(MailsData));
+            _EmailListsData = EmailListsData ?? throw new ArgumentNullException(nameof(EmailListsData));
             _TasksData = TasksData ?? throw new ArgumentNullException(nameof(TasksData));
             _SendersData = SendersData ?? throw new ArgumentNullException(nameof(SendersData));
 
@@ -91,6 +94,7 @@ namespace MailSender.WPF.ViewModel
             RefreshData(Recipients, _RecipientsData);
             RefreshData(Senders, _SendersData);
             RefreshData(Emails, _EmailsData);
+            RefreshData(EmailLists, _EmailListsData);
             RefreshData(Tasks, _TasksData);
             RefreshData(Servers, _ServersData);
         }

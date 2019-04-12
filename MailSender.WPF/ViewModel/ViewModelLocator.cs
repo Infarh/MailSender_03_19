@@ -19,6 +19,7 @@ namespace MailSender.WPF.ViewModel
                 .TryRegister<IRecipientsData, RecipientsDataLinq2Sql>()
                 .TryRegister<ISendersData, SendersDataInMemory>()
                 .TryRegister<IEmailsData, EmailsDataInMemory>()
+                .TryRegister<IEmailListsData, EmailListsDataInMemory>()
                 .TryRegister<IServersData, ServersDataInMemory>();
 
             services

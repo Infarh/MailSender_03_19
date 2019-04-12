@@ -59,7 +59,9 @@
     <Compile Include="Entityes\Sender.cs" />
     <Compile Include="Entityes\Server.cs" />
     <Compile Include="Services\DataInMemory.cs" />
+    <Compile Include="Services\EmailListsDataInMemory.cs" />
     <Compile Include="Services\EmailsDataInMemory.cs" />
+    <Compile Include="Services\Interfaces\IEmailListsData.cs" />
     <Compile Include="Services\Interfaces\IEmailsData.cs" />
     <Compile Include="Services\MailSenderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
