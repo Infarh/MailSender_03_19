@@ -12,15 +12,7 @@ namespace MailSender.ConsoleTest
     {
         static void Main(string[] args)
         {
-            //ThreadTest.Test();
-            //ThreadPoolTest.Test();
-            SynchronizationTest.Test();
-
-            lock (SynchronizationTest.SyncRoot)
-                Console.WriteLine("Главный поток завершил свою работу");
             Console.ReadLine();
         }
-
-
     }
 }

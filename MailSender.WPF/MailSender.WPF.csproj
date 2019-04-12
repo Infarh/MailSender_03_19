@@ -92,7 +92,7 @@
       <DependentUpon>ListControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\DebugBindingConverter.cs" />
-    <Compile Include="ValidationRules\Class1.cs" />
+    <Compile Include="ValidationRules\RegExValidationRule.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Views\RecipientEditor.xaml.cs">

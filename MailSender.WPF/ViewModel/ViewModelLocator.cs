@@ -26,14 +26,9 @@ namespace MailSender.WPF.ViewModel
                 .TryRegister<MainWindowViewModel>();
         }
 
-
         public MainWindowViewModel MainWindowModel => ServiceLocator.Current.GetInstance<MainWindowViewModel>();
 
-
-        public static void Cleanup()
-        {
-            // TODO Clear the ViewModels
-        }
+        public static void Cleanup() { }
     }
 
     internal static class SimpleIocExtensions

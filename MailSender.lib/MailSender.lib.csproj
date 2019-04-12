@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataService.cs" />
     <Compile Include="Data\linq2sql\MailSenderDB.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

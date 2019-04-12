@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace MailSender.lib.Services
 {
-    public class MailSenderService
+    public class MailSender
     {
         private readonly string _ServerAddress;
         private readonly int _Port;
@@ -13,7 +13,7 @@ namespace MailSender.lib.Services
         private readonly string _Login;
         private readonly string _Password;
 
-        public MailSenderService(string ServerAddress, int Port, bool SSL, string Login, string Password)
+        public MailSender(string ServerAddress, int Port, bool SSL, string Login, string Password)
         {
             _ServerAddress = ServerAddress;
             _Port = Port;
