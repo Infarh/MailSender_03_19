@@ -49,7 +49,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MailSenderDB.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Entityes\Base\Entity.cs" />
     <Compile Include="Entityes\Base\Human.cs" />
+    <Compile Include="Entityes\Base\NamedEntity.cs" />
     <Compile Include="Entityes\Email.cs" />
     <Compile Include="Entityes\EmailList.cs" />
     <Compile Include="Entityes\Recipient.cs" />

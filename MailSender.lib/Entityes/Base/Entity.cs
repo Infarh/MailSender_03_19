@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace MailSender.lib.Entityes.Base
 {
-    public class Human : NamedEntity
+    public abstract class Entity
     {
-        public virtual string EmailAddress { get; set; }
+        public int Id { get; set; }
     }
 }
