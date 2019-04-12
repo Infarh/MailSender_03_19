@@ -1,3 +1,4 @@
+using System;
 using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
@@ -11,22 +12,18 @@ namespace MailSender.WPF.ViewModel
     {
         public ViewModelLocator()
         {
-            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+            var services = SimpleIoc.Default;
+            ServiceLocator.SetLocatorProvider(() => services);
 
-            ////if (ViewModelBase.IsInDesignModeStatic)
-            ////{
-            ////    // Create design time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DesignDataService>();
-            ////}
-            ////else
-            ////{
-            ////    // Create run time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DataService>();
-            ////}
+            services
+                .TryRegister<IRecipientsData, RecipientsDataLinq2Sql>()
+                .TryRegister<ISendersData, SendersDataInMemory>()
+                .TryRegister<IEmailsData, EmailsDataInMemory>()
+                .TryRegister<IServersData, ServersDataInMemory>();
 
-            SimpleIoc.Default.Register<MainWindowViewModel>();
-            SimpleIoc.Default.Register<IRecipientsData, RecipientsDataLinq2Sql>();
-            SimpleIoc.Default.Register(() => new MailSenderDBDataContext());
+            services
+                .TryRegister(() => new MailSenderDBDataContext())
+                .TryRegister<MainWindowViewModel>();
         }
 
 
@@ -36,6 +33,34 @@ namespace MailSender.WPF.ViewModel
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
+        }
+    }
+
+    internal static class SimpleIocExtensions
+    {
+        public static SimpleIoc TryRegister<TInterface, TClass>(this SimpleIoc services)
+            where TInterface : class
+            where TClass : class, TInterface
+        {
+            if (services.IsRegistered<TInterface>()) return services;
+            services.Register<TInterface, TClass>();
+            return services;
+        }
+
+        public static SimpleIoc TryRegister<TClass>(this SimpleIoc services)
+            where TClass : class
+        {
+            if (services.IsRegistered<TClass>()) return services;
+            services.Register<TClass>();
+            return services;
+        }
+
+        public static SimpleIoc TryRegister<TClass>(this SimpleIoc services, Func<TClass> Factory)
+            where TClass : class
+        {
+            if (services.IsRegistered<TClass>()) return services;
+            services.Register(Factory);
+            return services;
         }
     }
 }
