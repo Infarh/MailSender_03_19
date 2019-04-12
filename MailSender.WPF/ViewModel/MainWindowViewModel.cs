@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.CodeDom;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -10,6 +12,9 @@ namespace MailSender.WPF.ViewModel
     public class MainWindowViewModel : ViewModelBase
     {
         private readonly IRecipientsData _RecipientsData;
+        private readonly IServersData _ServersData;
+        private readonly IMailsData _MailsData;
+        private readonly ISendersData _SendersData;
 
 
         private string _Title = "Рассыльщик почты";
@@ -50,10 +55,16 @@ namespace MailSender.WPF.ViewModel
 
         public ICommand SaveRecipientCommand { get; }
 
-        public MainWindowViewModel(IRecipientsData RecipientsData)
+        public MainWindowViewModel(
+            IRecipientsData RecipientsData,
+            IServersData ServersData,
+            IMailsData MailsData,
+            ISendersData SendersData)
         {
-            _RecipientsData = RecipientsData;
-
+            _RecipientsData = RecipientsData ?? throw new ArgumentNullException(nameof(RecipientsData));
+            _ServersData = ServersData ?? throw new ArgumentNullException(nameof(ServersData));
+            _MailsData = MailsData ?? throw new ArgumentNullException(nameof(MailsData));
+            _SendersData = SendersData ?? throw new ArgumentNullException(nameof(SendersData)); 
 
             LoadDataCommand = new RelayCommand(OnLoadDataCommandExecuted);
             SaveRecipientCommand = new RelayCommand<Recipient>(OnSaveRecipientCommandExecuted, CanSaveRecipientCommandExecute);
