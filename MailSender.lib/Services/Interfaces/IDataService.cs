@@ -8,9 +8,9 @@ namespace MailSender.lib.Services.Interfaces
 
         T GetById(int id);
 
-        void Add(T email);
+        void Add(T item);
 
-        void Edit(T email);
+        void Edit(T item);
 
         void Remove(int id);
 

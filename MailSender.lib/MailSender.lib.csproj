@@ -74,6 +74,9 @@
     <Compile Include="Services\Interfaces\ISendersData.cs" />
     <Compile Include="Services\Interfaces\IServersData.cs" />
     <Compile Include="Services\RecipientsDataLinq2Sql.cs" />
+    <Compile Include="Services\SchedulerTasksDataInMemory.cs" />
+    <Compile Include="Services\SendersDataInMemory.cs" />
+    <Compile Include="Services\ServersDataInMemory.cs" />
     <Compile Include="Service\Encryptor.cs" />
     <Compile Include="Service\MVVM\ViewModel.cs" />
   </ItemGroup>

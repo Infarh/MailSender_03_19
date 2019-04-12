@@ -40,18 +40,18 @@ namespace MailSender.lib.Services
             };
         }
 
-        public void Add(Recipient email)
+        public void Add(Recipient item)
         {
             throw new NotImplementedException();
         }
 
-        public void Edit(Recipient recipient)
+        public void Edit(Recipient item)
         {
-            var db_recipient = _Context.Recipients.FirstOrDefault(r => r.Id == recipient.Id);
+            var db_recipient = _Context.Recipients.FirstOrDefault(r => r.Id == item.Id);
             if(db_recipient is null) return;
 
-            db_recipient.Name = recipient.Name;
-            db_recipient.Email = recipient.EmailAddress;
+            db_recipient.Name = item.Name;
+            db_recipient.Email = item.EmailAddress;
 
             _Context.SubmitChanges();
         }

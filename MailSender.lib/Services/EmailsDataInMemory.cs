@@ -10,30 +10,30 @@ namespace MailSender.lib.Services
 {
     public class EmailsDataInMemory : IEmailsData
     {
-        private List<Email> _Emails = new List<Email>();
+        private readonly List<Email> _Emails = new List<Email>();
 
         public IEnumerable<Email> GetAll() => _Emails;
 
         public Email GetById(int id) => _Emails.FirstOrDefault(e => e.Id == id);
 
-        public void Add(Email email)
+        public void Add(Email item)
         {
-            if(email is null) throw new ArgumentNullException(nameof(email));
-            if(_Emails.Contains(email)) return;
+            if(item is null) throw new ArgumentNullException(nameof(item));
+            if(_Emails.Contains(item)) return;
 
-            email.Id = _Emails.Count == 0 ? 1 : _Emails.Max(e => e.Id) + 1;
-            _Emails.Add(email);
+            item.Id = _Emails.Count == 0 ? 1 : _Emails.Max(e => e.Id) + 1;
+            _Emails.Add(item);
         }
 
-        public void Edit(Email email)
+        public void Edit(Email item)
         {
-            if(email is null) throw new ArgumentNullException(nameof(email));
+            if(item is null) throw new ArgumentNullException(nameof(item));
 
-            var db_email = GetById(email.Id);
+            var db_email = GetById(item.Id);
             if(db_email is null) return;
 
-            db_email.Subject = email.Subject;
-            db_email.Body = email.Body;
+            db_email.Subject = item.Subject;
+            db_email.Body = item.Body;
         }
 
         public void Remove(int id)
