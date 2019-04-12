@@ -1,5 +1,6 @@
 ﻿using System;
 using System.CodeDom;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
@@ -13,7 +14,8 @@ namespace MailSender.WPF.ViewModel
     {
         private readonly IRecipientsData _RecipientsData;
         private readonly IServersData _ServersData;
-        private readonly IMailsData _MailsData;
+        private readonly IEmailsData _EmailsData;
+        private readonly ISchedulerTasksData _TasksData;
         private readonly ISendersData _SendersData;
 
 
@@ -42,6 +44,11 @@ namespace MailSender.WPF.ViewModel
         }
 
         public ObservableCollection<Recipient> Recipients { get; } = new ObservableCollection<Recipient>();
+        public ObservableCollection<Sender> Senders { get; } = new ObservableCollection<Sender>();
+        public ObservableCollection<Server> Servers { get; } = new ObservableCollection<Server>();
+        public ObservableCollection<SchedulerTask> Tasks { get; } = new ObservableCollection<SchedulerTask>();
+        public ObservableCollection<Email> Emails { get; } = new ObservableCollection<Email>();
+        public ObservableCollection<EmailList> EmailLists { get; } = new ObservableCollection<EmailList>();
 
         private Recipient _SelectedRecipient;
 
@@ -58,13 +65,15 @@ namespace MailSender.WPF.ViewModel
         public MainWindowViewModel(
             IRecipientsData RecipientsData,
             IServersData ServersData,
-            IMailsData MailsData,
+            IEmailsData MailsData,
+            ISchedulerTasksData TasksData,
             ISendersData SendersData)
         {
             _RecipientsData = RecipientsData ?? throw new ArgumentNullException(nameof(RecipientsData));
             _ServersData = ServersData ?? throw new ArgumentNullException(nameof(ServersData));
-            _MailsData = MailsData ?? throw new ArgumentNullException(nameof(MailsData));
-            _SendersData = SendersData ?? throw new ArgumentNullException(nameof(SendersData)); 
+            _EmailsData = MailsData ?? throw new ArgumentNullException(nameof(MailsData));
+            _TasksData = TasksData ?? throw new ArgumentNullException(nameof(TasksData));
+            _SendersData = SendersData ?? throw new ArgumentNullException(nameof(SendersData));
 
             LoadDataCommand = new RelayCommand(OnLoadDataCommandExecuted);
             SaveRecipientCommand = new RelayCommand<Recipient>(OnSaveRecipientCommandExecuted, CanSaveRecipientCommandExecute);
@@ -72,9 +81,18 @@ namespace MailSender.WPF.ViewModel
 
         private void OnLoadDataCommandExecuted()
         {
-            Recipients.Clear();
-            foreach (var recipient in _RecipientsData.GetAll())
-                Recipients.Add(recipient);
+            void RefreshData<T>(ICollection<T> items, IDataService<T> service)
+            {
+                items.Clear();
+                foreach (var item in service.GetAll())
+                    items.Add(item);
+            }
+
+            RefreshData(Recipients, _RecipientsData);
+            RefreshData(Senders, _SendersData);
+            RefreshData(Emails, _EmailsData);
+            RefreshData(Tasks, _TasksData);
+            RefreshData(Servers, _ServersData);
         }
 
         private void OnSaveRecipientCommandExecuted(Recipient recipient)
