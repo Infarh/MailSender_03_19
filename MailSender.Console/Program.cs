@@ -8,7 +8,7 @@ namespace MailSender.ConsoleTest
 {
     class Program
     {
-        private static long Factorial(int n)
+        public static long Factorial(int n)
         {
             long result = 1;
             for (var i = 1; i <= n; i++)
@@ -29,9 +29,13 @@ namespace MailSender.ConsoleTest
             //task.Start();
             //var result = task.Result;
 
-            ParallelTest.Test();
+            //ParallelTest.Test();
+            //TasksTest.Test();
+
+            AsyncAwaitTest.TestAsync();
 
 
+            Console.WriteLine("Главный поток завершился");
             Console.ReadLine();
         }
     }

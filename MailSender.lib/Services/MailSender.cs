@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace MailSender.lib.Services
 {
@@ -35,6 +37,20 @@ namespace MailSender.lib.Services
                 }
         }
 
+        public async Task SendEmailAsync(string Subject, string Body, string From, string To)
+        {
+            using (var msg = new MailMessage(From, To, Subject, Body))
+            using (var client = new SmtpClient(_ServerAddress, _Port)
+            {
+                EnableSsl = _SSL,
+                Credentials = new NetworkCredential(_Login, _Password)
+            })
+            {
+                //client.Send(msg);
+                await client.SendMailAsync(msg).ConfigureAwait(false);
+            }
+        }
+
         public void SendEmails(string Subject, string Body, string From, IEnumerable<string> To)
         {
             foreach (var to in To)
@@ -59,6 +75,18 @@ namespace MailSender.lib.Services
                 //ThreadPool.QueueUserWorkItem(p => SendEmail(Subject, Body, From, tmp_to));
                 ThreadPool.QueueUserWorkItem(sender => SendEmail(Subject, Body, From, (string)sender), to);
             }
+        }
+
+        //public async Task SendEmailsAsync(string Subject, string Body, string From, IEnumerable<string> To)
+        //{
+        //    foreach (var to in To)
+        //        await SendEmailAsync(Subject, Body, From, to).ConfigureAwait(false);
+        //}
+
+        public async Task SendEmailsAsync(string Subject, string Body, string From, IEnumerable<string> To)
+        {
+            var tasks = To.Select(to => SendEmailAsync(Subject, Body, From, to));
+            await Task.WhenAll(tasks).ConfigureAwait(false);
         }
     }
 }
