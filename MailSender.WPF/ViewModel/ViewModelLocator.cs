@@ -20,7 +20,9 @@ namespace MailSender.WPF.ViewModel
                 .TryRegister<ISendersData, SendersDataInMemory>()
                 .TryRegister<IEmailsData, EmailsDataInMemory>()
                 .TryRegister<IEmailListsData, EmailListsDataInMemory>()
-                .TryRegister<IServersData, ServersDataInMemory>();
+                .TryRegister<IServersData, ServersDataInMemory>()
+                .TryRegister<ISendingMailScheduler, SendingMailSheduler>()
+                .TryRegister<IEmailService, EmailService>();
 
             services
                 .TryRegister(() => new MailSenderDBDataContext())

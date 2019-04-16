@@ -18,7 +18,7 @@ namespace MailSender.lib.Services
             db_task.Sender = task.Sender;
             db_task.Time = task.Time;
             db_task.Emails = task.Emails;
-            db_task.Recipients = task.Recipients;
+            db_task.SendingList = task.SendingList;
         }
     }
 }

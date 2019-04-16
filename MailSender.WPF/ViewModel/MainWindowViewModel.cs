@@ -18,6 +18,8 @@ namespace MailSender.WPF.ViewModel
         private readonly IEmailListsData _EmailListsData;
         private readonly ISchedulerTasksData _TasksData;
         private readonly ISendersData _SendersData;
+        private readonly IEmailService _EmailService;
+        private readonly ISendingMailScheduler _SchdulerMailService;
 
 
         private string _Title = "Рассыльщик почты";
@@ -69,7 +71,9 @@ namespace MailSender.WPF.ViewModel
             IEmailsData MailsData,
             IEmailListsData EmailListsData,
             ISchedulerTasksData TasksData,
-            ISendersData SendersData)
+            ISendersData SendersData,
+            IEmailService EmailService,
+            ISendingMailScheduler SchdulerMailService)
         {
             _RecipientsData = RecipientsData ?? throw new ArgumentNullException(nameof(RecipientsData));
             _ServersData = ServersData ?? throw new ArgumentNullException(nameof(ServersData));
@@ -77,6 +81,8 @@ namespace MailSender.WPF.ViewModel
             _EmailListsData = EmailListsData ?? throw new ArgumentNullException(nameof(EmailListsData));
             _TasksData = TasksData ?? throw new ArgumentNullException(nameof(TasksData));
             _SendersData = SendersData ?? throw new ArgumentNullException(nameof(SendersData));
+            _EmailService = EmailService ?? throw new ArgumentNullException(nameof(EmailService));
+            _SchdulerMailService = SchdulerMailService ?? throw new ArgumentNullException(nameof(SchdulerMailService));
 
             LoadDataCommand = new RelayCommand(OnLoadDataCommandExecuted);
             SaveRecipientCommand = new RelayCommand<Recipient>(OnSaveRecipientCommandExecuted, CanSaveRecipientCommandExecute);

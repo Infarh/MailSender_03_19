@@ -9,7 +9,9 @@ namespace MailSender.lib.Entityes
 
         public Sender Sender { get; set; }
 
-        public RecipientsList Recipients { get; set; }
+        public Server Server { get; set; }
+
+        public RecipientsList SendingList { get; set; }
 
         public EmailList Emails { get; set; }
     }

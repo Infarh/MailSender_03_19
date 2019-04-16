@@ -4,10 +4,20 @@ using System.Net;
 using System.Net.Mail;
 using System.Threading;
 using System.Threading.Tasks;
+using MailSender.lib.Services.Interfaces;
 
 namespace MailSender.lib.Services
 {
-    public class MailSender
+    public class EmailService : IEmailService
+    {
+        public IEmailSender GetSender(string ServerAddress, int Port, bool SSL, string Login, string Password)
+        {
+            return new MailSender(ServerAddress, Port, SSL, Login, Password);
+        }
+    }
+
+
+    public class MailSender : IEmailSender
     {
         private readonly string _ServerAddress;
         private readonly int _Port;
@@ -37,8 +47,10 @@ namespace MailSender.lib.Services
                 }
         }
 
-        public async Task SendEmailAsync(string Subject, string Body, string From, string To)
+        public async Task SendEmailAsync(string Subject, string Body, string From, string To, CancellationToken Cancel)
         {
+            Cancel.ThrowIfCancellationRequested();
+
             using (var msg = new MailMessage(From, To, Subject, Body))
             using (var client = new SmtpClient(_ServerAddress, _Port)
             {
@@ -83,9 +95,10 @@ namespace MailSender.lib.Services
         //        await SendEmailAsync(Subject, Body, From, to).ConfigureAwait(false);
         //}
 
-        public async Task SendEmailsAsync(string Subject, string Body, string From, IEnumerable<string> To)
+        public async Task SendEmailsAsync(string Subject, string Body, string From, IEnumerable<string> To, CancellationToken Cancel)
         {
-            var tasks = To.Select(to => SendEmailAsync(Subject, Body, From, to));
+            Cancel.ThrowIfCancellationRequested();
+            var tasks = To.Select(to => SendEmailAsync(Subject, Body, From, to, Cancel));
             await Task.WhenAll(tasks).ConfigureAwait(false);
         }
     }
