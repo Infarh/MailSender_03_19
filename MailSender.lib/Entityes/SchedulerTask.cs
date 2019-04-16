@@ -7,10 +7,12 @@ namespace MailSender.lib.Entityes
     {
         public DateTime Time { get; set; }
 
-        public Sender Sender { get; set; }
+        public virtual Server Server { get; set; }
 
-        public RecipientsList Recipients { get; set; }
+        public virtual Sender Sender { get; set; }
 
-        public EmailList Emails { get; set; }
+        public virtual RecipientsList Recipients { get; set; }
+
+        public virtual EmailList Emails { get; set; }
     }
 }

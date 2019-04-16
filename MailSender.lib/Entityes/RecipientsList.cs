@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
+using MailSender.lib.Entityes.Base;
 
 namespace MailSender.lib.Entityes
 {
-    public class RecipientsList
+    public class RecipientsList : NamedEntity
     {
-        public string Name { get; set; }
-
-        public ICollection<Recipient> Recipients { get; set; } = new List<Recipient>();
+        public virtual ICollection<Recipient> Recipients { get; set; } = new List<Recipient>();
     }
 }

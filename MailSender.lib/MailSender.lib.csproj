@@ -31,8 +31,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
@@ -43,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\EF\MailSenderDB.cs" />
     <Compile Include="Data\linq2sql\MailSenderDB.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -58,6 +66,11 @@
     <Compile Include="Entityes\SchedulerTask.cs" />
     <Compile Include="Entityes\Sender.cs" />
     <Compile Include="Entityes\Server.cs" />
+    <Compile Include="Migrations\201904161722091_Initial.cs" />
+    <Compile Include="Migrations\201904161722091_Initial.Designer.cs">
+      <DependentUpon>201904161722091_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Services\DataInMemory.cs" />
     <Compile Include="Services\EmailListsDataInMemory.cs" />
     <Compile Include="Services\EmailsDataInMemory.cs" />
@@ -79,6 +92,7 @@
     <Compile Include="Services\RecipientsDataLinq2Sql.cs" />
     <Compile Include="Services\SchedulerTasksDataInMemory.cs" />
     <Compile Include="Services\SendersDataInMemory.cs" />
+    <Compile Include="Services\ServersDataEF.cs" />
     <Compile Include="Services\ServersDataInMemory.cs" />
     <Compile Include="Service\Encryptor.cs" />
     <Compile Include="Service\MVVM\ViewModel.cs" />
@@ -93,6 +107,7 @@
     <None Include="Data\linq2sql\MailSenderDB.dbml.layout">
       <DependentUpon>MailSenderDB.dbml</DependentUpon>
     </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -100,6 +115,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201904161722091_Initial.resx">
+      <DependentUpon>201904161722091_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -16,11 +16,6 @@ namespace MailSender.WPF.Test.ViewModels
         public string Title
         {
             get => _Title;
-            //set
-            //{
-            //    _Title = value;
-            //    OnPropertyChanged();
-            //}
             set => Set(ref _Title, value);
         }
 
