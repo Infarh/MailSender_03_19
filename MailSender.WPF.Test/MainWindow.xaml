@@ -5,12 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:l="clr-namespace:MailSender.WPF.Test"
         xmlns:vm="clr-namespace:MailSender.WPF.Test.ViewModels"
-        Title="{Binding Title}"
         Height="450"
         Width="800">
-    <Grid>
-        <TextBlock Name="ProgressBlock" Text="Progress" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="71,45,0,0"/>
-
-        <Button Name="StartButton" Content="Starat" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="170,122,0,0" Height="51" Width="161" Click="Button_Click"/>
-    </Grid>
+    <Grid/>
 </Window>
