@@ -5,7 +5,7 @@ using MailSender.lib.Data.linq2sql;
 using MailSender.lib.Entityes;
 using MailSender.lib.Services.Interfaces;
 
-namespace MailSender.lib.Services
+namespace MailSender.lib.Services.InMemory
 {
     public class RecipientsDataLinq2Sql : IRecipientsData
     {

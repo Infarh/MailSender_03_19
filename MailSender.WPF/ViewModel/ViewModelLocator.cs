@@ -5,6 +5,7 @@ using GalaSoft.MvvmLight.Ioc;
 using MailSender.lib.Data.EF;
 using MailSender.lib.Data.linq2sql;
 using MailSender.lib.Services;
+using MailSender.lib.Services.InMemory;
 using MailSender.lib.Services.Interfaces;
 
 namespace MailSender.WPF.ViewModel

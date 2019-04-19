@@ -1,5 +1,6 @@
 ﻿using System;
 using MailSender.lib.Entityes;
+using MailSender.lib.Services.InMemory;
 using MailSender.lib.Services.Interfaces;
 
 namespace MailSender.lib.Services

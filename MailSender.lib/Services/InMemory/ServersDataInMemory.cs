@@ -2,7 +2,7 @@
 using MailSender.lib.Entityes;
 using MailSender.lib.Services.Interfaces;
 
-namespace MailSender.lib.Services
+namespace MailSender.lib.Services.InMemory
 {
     public class ServersDataInMemory : DataInMemory<Server>, IServersData
     {

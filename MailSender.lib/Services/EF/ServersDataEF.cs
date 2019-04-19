@@ -4,7 +4,7 @@ using MailSender.lib.Data.EF;
 using MailSender.lib.Entityes;
 using MailSender.lib.Services.Interfaces;
 
-namespace MailSender.lib.Services
+namespace MailSender.lib.Services.EF
 {
     public class ServersDataEF : IServersData
     {

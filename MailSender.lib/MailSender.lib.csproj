@@ -71,9 +71,9 @@
       <DependentUpon>201904161722091_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Services\DataInMemory.cs" />
-    <Compile Include="Services\EmailListsDataInMemory.cs" />
-    <Compile Include="Services\EmailsDataInMemory.cs" />
+    <Compile Include="Services\InMemory\DataInMemory.cs" />
+    <Compile Include="Services\InMemory\EmailListsDataInMemory.cs" />
+    <Compile Include="Services\InMemory\EmailsDataInMemory.cs" />
     <Compile Include="Services\Interfaces\IEmailListsData.cs" />
     <Compile Include="Services\Interfaces\IEmailsData.cs" />
     <Compile Include="Services\MailSender.cs" />
@@ -89,11 +89,11 @@
     <Compile Include="Services\Interfaces\ISchedulerTasksData.cs" />
     <Compile Include="Services\Interfaces\ISendersData.cs" />
     <Compile Include="Services\Interfaces\IServersData.cs" />
-    <Compile Include="Services\RecipientsDataLinq2Sql.cs" />
-    <Compile Include="Services\SchedulerTasksDataInMemory.cs" />
-    <Compile Include="Services\SendersDataInMemory.cs" />
-    <Compile Include="Services\ServersDataEF.cs" />
-    <Compile Include="Services\ServersDataInMemory.cs" />
+    <Compile Include="Services\InMemory\RecipientsDataLinq2Sql.cs" />
+    <Compile Include="Services\InMemory\SchedulerTasksDataInMemory.cs" />
+    <Compile Include="Services\InMemory\SendersDataInMemory.cs" />
+    <Compile Include="Services\EF\ServersDataEF.cs" />
+    <Compile Include="Services\InMemory\ServersDataInMemory.cs" />
     <Compile Include="Service\Encryptor.cs" />
     <Compile Include="Service\MVVM\ViewModel.cs" />
   </ItemGroup>
@@ -120,6 +120,9 @@
     <EmbeddedResource Include="Migrations\201904161722091_Initial.resx">
       <DependentUpon>201904161722091_Initial.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\Linq2SQL\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

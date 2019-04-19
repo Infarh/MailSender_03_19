@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MailSender.lib.Entityes.Base;
 using MailSender.lib.Services.Interfaces;
 
-namespace MailSender.lib.Services
+namespace MailSender.lib.Services.InMemory
 {
     public abstract class DataInMemory<T> : IDataService<T>
         where T : Entity

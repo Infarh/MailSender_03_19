@@ -2,6 +2,7 @@
 using System.Linq;
 using MailSender.lib.Entityes;
 using MailSender.lib.Services;
+using MailSender.lib.Services.InMemory;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MailSender.lib.Tests.Services

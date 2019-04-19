@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MailSender.lib.Entityes;
 using MailSender.lib.Services.Interfaces;
 
-namespace MailSender.lib.Services
+namespace MailSender.lib.Services.InMemory
 {
     public class EmailsDataInMemory : DataInMemory<Email>, IEmailsData
     {
