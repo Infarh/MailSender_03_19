@@ -8,6 +8,7 @@ using MailSender.lib.Services;
 using MailSender.lib.Services.EF;
 using MailSender.lib.Services.InMemory;
 using MailSender.lib.Services.Interfaces;
+using MailSender.lib.Services.Linq2SQL;
 
 namespace MailSender.WPF.ViewModel
 {
