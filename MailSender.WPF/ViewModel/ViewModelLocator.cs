@@ -5,6 +5,7 @@ using GalaSoft.MvvmLight.Ioc;
 using MailSender.lib.Data.EF;
 using MailSender.lib.Data.linq2sql;
 using MailSender.lib.Services;
+using MailSender.lib.Services.EF;
 using MailSender.lib.Services.InMemory;
 using MailSender.lib.Services.Interfaces;
 
@@ -18,15 +19,16 @@ namespace MailSender.WPF.ViewModel
             ServiceLocator.SetLocatorProvider(() => services);
 
             services
-                .TryRegister<IRecipientsData, RecipientsDataLinq2Sql>()
-                .TryRegister<ISendersData, SendersDataInMemory>()
-                .TryRegister<IEmailsData, EmailsDataInMemory>()
-                .TryRegister<IEmailListsData, EmailListsDataInMemory>()
-                .TryRegister<IServersData, ServersDataInMemory>();
+                .TryRegister<IRecipientsData, RecipientsDataEF>()
+                .TryRegister<ISendersData, SendersDataEF>()
+                .TryRegister<IEmailsData, EmailsDataEF>()
+                .TryRegister<IEmailListsData, EmailListsDataEF>()
+                .TryRegister<ISchedulerTasksData, SchedulerTasksDataEF>()
+                .TryRegister<IServersData, ServersDataEF>();
 
             services
                 .TryRegister(() => new MailSenderDB())
-                .TryRegister(() => new MailSenderDBDataContext())
+                //.TryRegister(() => new MailSenderDBDataContext())
                 .TryRegister<MainWindowViewModel>();
         }
 

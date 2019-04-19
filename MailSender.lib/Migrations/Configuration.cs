@@ -49,6 +49,15 @@ namespace MailSender.lib.Migrations
                     UserName = "user",
                     Password = "password"
                 });
+
+            context.Emails.AddOrUpdate(email => email.Subject,
+                new Email{ Subject = "Заголовок письма 1", Body = "Текст пиьма 1" },
+                new Email{ Subject = "Заголовок письма 2", Body = "Текст пиьма 2" },
+                new Email{ Subject = "Заголовок письма 3", Body = "Текст пиьма 3" },
+                new Email{ Subject = "Заголовок письма 4", Body = "Текст пиьма 4" }
+                );
+
+
         }
     }
 }
