@@ -35,54 +35,12 @@
                             </Style>
                         </ToolBarTray.Resources>
                         <ToolBar>
-                            <!--<TextBlock Text="Отправители"
-                                       Margin="0,0,10,0"
-                                       VerticalAlignment="Center"/>
-                            <ComboBox Width="150" SelectedIndex="1"
-                                      DisplayMemberPath="Name"
-                                      ItemsSource="{x:Static data:TestData.Senders}"/>
-                            <Button ToolTip="Добавить">
-                                <fa:ImageAwesome Icon="Plus" Height="15" Foreground="Green"/>
-                            </Button>
-                            <Button ToolTip="Редактировать">
-                                <fa:ImageAwesome Icon="Edit" Height="15" Foreground="DarkBlue"/>
-                            </Button>
-                            <Button ToolTip="Удалить">
-                                <fa:ImageAwesome Icon="Remove" Height="15" Foreground="Red">
-                                    <fa:ImageAwesome.Effect>
-                                        <DropShadowEffect ShadowDepth="1"/>
-                                    </fa:ImageAwesome.Effect>
-                                </fa:ImageAwesome>
-                            </Button>-->
                             <c:ListControl PanelName="Отправители" 
-                                           Items="{x:Static data:TestData.Senders}"
+                                           Items="{Binding Senders}"
                                            DisplayMemberPath="Name"/>
                         </ToolBar>
                         <ToolBar Band="1">
-                            <!--<TextBlock Text="Сервера"
-                                       Margin="0,0,10,0"
-                                       VerticalAlignment="Center"/>
-                            <ComboBox Width="150" SelectedIndex="1"
-                                      ItemsSource="{x:Static data:TestData.Servers}">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate DataType="{x:Type entityes:Server}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Name}"/>
-                                            <TextBlock Text="{Binding Address}" Margin="4,0,0,0" Opacity="0.6"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                            <Button ToolTip="Добавить">
-                                <Image Source="Media/add.png"/>
-                            </Button>
-                            <Button ToolTip="Редактировать">
-                                <Image Source="Media/Edit.png"/>
-                            </Button>
-                            <Button ToolTip="Удалить">
-                                <Image Source="Media/remove.png"/>
-                            </Button>-->
-                            <c:ListControl PanelName="Сервера" Items="{x:Static data:TestData.Servers}">
+                            <c:ListControl PanelName="Сервера" Items="{Binding Servers}">
                                 <c:ListControl.ItemTemplate>
                                     <DataTemplate DataType="{x:Type entityes:Server}">
                                         <StackPanel Orientation="Horizontal">
@@ -145,11 +103,57 @@
                         <Button>Отправить сразу</Button>
                     </StackPanel>
                     <GroupBox Header="Задания планировщика" Grid.Column="1">
-                        <ListBox>
-                            <ListBoxItem>Задание 1</ListBoxItem>
-                            <ListBoxItem>Задание 2</ListBoxItem>
-                            <ListBoxItem>Задание 3</ListBoxItem>
-                            <ListBoxItem>Задание 4</ListBoxItem>
+                        <ListBox ItemsSource="{Binding Tasks}">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListBoxItem}">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate DataType="{x:Type entityes:SchedulerTask}">
+                                    <GroupBox>
+                                        <GroupBox.Header>
+                                            <TextBlock>
+                                                Задача запланирована на <TextBlock Text="{Binding Time}"/> - время
+                                            </TextBlock>
+                                        </GroupBox.Header>
+                                        <StackPanel>
+                                            <UniformGrid Rows="1">
+                                                <BulletDecorator ToolTip="{Binding Sender.EmailAddress}">
+                                                    <BulletDecorator.Bullet>
+                                                        <TextBlock>Отправитель:</TextBlock>
+                                                    </BulletDecorator.Bullet>
+                                                    <TextBlock Text="{Binding Sender.Name}"/>
+                                                </BulletDecorator>
+                                                <BulletDecorator ToolTip="{Binding Server.Address}">
+                                                    <BulletDecorator.Bullet>
+                                                        <TextBlock>Сервер:</TextBlock>
+                                                    </BulletDecorator.Bullet>
+                                                    <TextBlock Text="{Binding Server.Name}"/>
+                                                </BulletDecorator>
+                                            </UniformGrid>
+                                            <GroupBox Header="Получатели" BorderThickness="0">
+                                                <ItemsControl ItemsSource="{Binding Recipients.Recipients}" MaxHeight="50">
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate DataType="{x:Type entityes:Recipient}">
+                                                            <TextBlock Text="{Binding Name}" ToolTip="{Binding EmailAddress}"/>
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
+                                                </ItemsControl>
+                                            </GroupBox>
+                                            <GroupBox Header="Письма" BorderThickness="0">
+                                                <ItemsControl ItemsSource="{Binding Emails.Emails}" MaxHeight="50">
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate DataType="{x:Type entityes:Email}">
+                                                            <TextBlock Text="{Binding Subject}" ToolTip="{Binding Body}"/>
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
+                                                </ItemsControl>
+                                            </GroupBox>
+                                        </StackPanel>
+                                    </GroupBox>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
                         </ListBox>
                     </GroupBox>
                 </Grid>
@@ -164,10 +168,12 @@
                         <DockPanel>
                             <Button DockPanel.Dock="Bottom">Удалить письмо</Button>
                             <Button DockPanel.Dock="Bottom">Добавить письмо</Button>
-                            <ListBox>
-                                <ListBoxItem>Письмо 1</ListBoxItem>
-                                <ListBoxItem>Письмо 2</ListBoxItem>
-                                <ListBoxItem>Письмо 3</ListBoxItem>
+                            <ListBox ItemsSource="{Binding Emails}" SelectedItem="{Binding SelectedEmailInEditor}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type entityes:Email}">
+                                        <TextBlock Text="{Binding Subject}"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
                             </ListBox>
                         </DockPanel>
                     </GroupBox>
@@ -175,10 +181,10 @@
                         <DockPanel>
                             <GroupBox Header="Заголовок" DockPanel.Dock="Top"
                                       BorderBrush="{x:Null}">
-                                <TextBox/>
+                                <TextBox Text="{Binding SelectedEmailInEditor.Subject}"/>
                             </GroupBox>
                             <GroupBox Header="Текст" BorderBrush="{x:Null}">
-                                <TextBox/>
+                                <TextBox Text="{Binding SelectedEmailInEditor.Body}" AcceptsReturn="True"/>
                             </GroupBox>
                         </DockPanel>
                     </GroupBox>

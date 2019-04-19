@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 using MailSender.lib.Entityes;
 using MailSender.lib.Migrations;
 
@@ -19,7 +14,6 @@ namespace MailSender.lib.Data.EF
             //System.Data.Entity.Database.SetInitializer(new System.Data.Entity.NullDatabaseInitializer<MailSenderDB>());
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<MailSenderDB, Configuration>());
         }
-
 
         public DbSet<Server> Servers { get; set; }
 

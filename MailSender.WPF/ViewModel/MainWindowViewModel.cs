@@ -59,6 +59,14 @@ namespace MailSender.WPF.ViewModel
             set => Set(ref _SelectedRecipient, value);
         }
 
+        private Email _SelectedEmailInEditor;
+
+        public Email SelectedEmailInEditor
+        {
+            get => _SelectedEmailInEditor;
+            set => Set(ref _SelectedEmailInEditor, value);
+        }
+
         public ICommand LoadDataCommand { get; }
 
         public ICommand SaveRecipientCommand { get; }
@@ -84,11 +92,11 @@ namespace MailSender.WPF.ViewModel
 
         private void OnLoadDataCommandExecuted()
         {
-            void RefreshData<T>(ICollection<T> items, IDataService<T> service)
+            void RefreshData<T>(ICollection<T> Items, IDataService<T> Service)
             {
-                items.Clear();
-                foreach (var item in service.GetAll())
-                    items.Add(item);
+                Items.Clear();
+                foreach (var item in Service.GetAll())
+                    Items.Add(item);
             }
 
             RefreshData(Recipients, _RecipientsData);
@@ -99,10 +107,7 @@ namespace MailSender.WPF.ViewModel
             RefreshData(Servers, _ServersData);
         }
 
-        private void OnSaveRecipientCommandExecuted(Recipient recipient)
-        {
-            _RecipientsData.Edit(recipient);
-        }
+        private void OnSaveRecipientCommandExecuted(Recipient recipient) => _RecipientsData.Edit(recipient);
 
         private bool CanSaveRecipientCommandExecute(Recipient recipient) => recipient != null;
     }
