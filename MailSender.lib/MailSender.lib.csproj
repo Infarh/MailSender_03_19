@@ -71,6 +71,7 @@
       <DependentUpon>201904161722091_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Services\EF\DataEF.cs" />
     <Compile Include="Services\EF\EmailListsDataEF.cs" />
     <Compile Include="Services\EF\EmailsDataEF.cs" />
     <Compile Include="Services\EF\RecipientsDataEF.cs" />
