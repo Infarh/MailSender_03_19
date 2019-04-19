@@ -71,6 +71,11 @@
       <DependentUpon>201904161722091_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Services\EF\EmailListsDataEF.cs" />
+    <Compile Include="Services\EF\EmailsDataEF.cs" />
+    <Compile Include="Services\EF\RecipientsDataEF.cs" />
+    <Compile Include="Services\EF\SchedulerTasksDataEF.cs" />
+    <Compile Include="Services\EF\SendersDataEF.cs" />
     <Compile Include="Services\InMemory\DataInMemory.cs" />
     <Compile Include="Services\InMemory\EmailListsDataInMemory.cs" />
     <Compile Include="Services\InMemory\EmailsDataInMemory.cs" />

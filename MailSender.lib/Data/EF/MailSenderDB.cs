@@ -33,6 +33,8 @@ namespace MailSender.lib.Data.EF
 
         public DbSet<EmailList> EmailList { get; set; }
 
+        public DbSet<Email> Emails { get; set; }
+
         public MailSenderDB() : base("name=MailSenderDB") { }
 
         public MailSenderDB(string ConnectionString) : base(ConnectionString) { }

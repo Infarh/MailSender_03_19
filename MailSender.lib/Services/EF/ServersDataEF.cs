@@ -6,49 +6,37 @@ using MailSender.lib.Services.Interfaces;
 
 namespace MailSender.lib.Services.EF
 {
-    public class ServersDataEF : IServersData
+    public class ServersDataEf : IServersData
     {
         private readonly MailSenderDB _db;
 
-        public ServersDataEF(MailSenderDB db)
+        public ServersDataEf(MailSenderDB db) => _db = db;
+
+        public IEnumerable<Server> GetAll() => _db.Servers.AsEnumerable();
+
+        public Server GetById(int Id) => _db.Servers.FirstOrDefault(Server => Server.Id == Id);
+
+        public void Add(Server Item) => _db.Servers.Add(Item);
+
+        public void Edit(Server Item)
         {
-            _db = db;
+            var server = GetById(Item.Id);
+            if(server is null) return;
+
+            server.Address = Item.Address;
+            server.Port = Item.Port;
+            server.UseSSL = Item.UseSSL;
+            server.UserName = Item.UserName;
+            server.Password = Item.Password;
         }
 
-        public IEnumerable<Server> GetAll()
+        public void Remove(int Id)
         {
-            return _db.Servers.AsEnumerable();
+            var item = GetById(Id);
+            if(item is null) return;
+            _db.Servers.Remove(item);
         }
 
-        public Server GetById(int id)
-        {
-            return _db.Servers.FirstOrDefault(server => server.Id == id);
-        }
-
-        public void Add(Server item)
-        {
-            _db.Servers.Add(item);
-        }
-
-        public void Edit(Server item)
-        {
-            var server = GetById(item.Id);
-
-            server.Address = item.Address;
-            server.Port = item.Port;
-            server.UseSSL = item.UseSSL;
-            server.UserName = item.UserName;
-            server.Password = item.Password;
-        }
-
-        public void Remove(int id)
-        {
-            _db.Servers.Remove(GetById(id));
-        }
-
-        public void SaveChanges()
-        {
-            _db.SaveChanges();
-        }
+        public void SaveChanges() => _db.SaveChanges();
     }
 }
